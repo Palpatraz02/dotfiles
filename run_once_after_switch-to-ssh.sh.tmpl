@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# Navigate into Chezmoi's internal Git source directory
+cd "{{ .chezmoi.sourceDir }}"
+
+# Fetch the current remote origin URL
+CURRENT_URL=$(git remote get-url origin)
+
+# If the repo is currently tracking via HTTPS, flip it to SSH
+if [[ "$CURRENT_URL" =~ ^https://github.com/ ]]; then
+    SSH_URL=$(echo "$CURRENT_URL" | sed -E 's#^https://github\.com/([^/]+)/(.+)$#git@github.com:\1/\2#')
+    
+    echo "🔄 SSH keys are now deployed! Switching Chezmoi repository remote to SSH..."
+    git remote set-url origin "$SSH_URL"
+fi
