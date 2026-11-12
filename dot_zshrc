@@ -1,0 +1,4 @@
+# Omarchy-inspired Zsh configuration.
+# Edit the files under ~/.config/zsh to customize your shell.
+: ${ZSH_CONFIG_DIR:=$HOME/.config/zsh}
+source "$ZSH_CONFIG_DIR/init.zsh"
